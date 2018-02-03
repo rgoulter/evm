@@ -14,7 +14,16 @@ before_install:
 script:
   - bundle exec rspec spec
   - bin/emacs --version
-  - bin/emacs -Q --batch --eval '(unless (string= (getenv "EVM_EMACS") (format "emacs-%d.%d-travis" emacs-major-version emacs-minor-version)) (kill-emacs 1))'
+  - bin/emacs -Q --batch --eval
+        '(unless (or (string= (getenv "EVM_EMACS")
+                              (format "emacs-%d.%d-travis"
+                                      emacs-major-version
+                                      emacs-minor-version))
+                     (and (string= (getenv "EVM_EMACS") "emacs-26-pretest-travis")
+                          (= emacs-major-version 26))
+                     (and (string= (getenv "EVM_EMACS") "emacs-git-snapshot-travis")
+                          (= emacs-major-version 27)))
+                 (kill-emacs 1))'
 rvm:
   - 1.9.3
 env:
@@ -26,3 +35,5 @@ env:
   - EVM_EMACS=emacs-25.1-travis
   - EVM_EMACS=emacs-25.2-travis
   - EVM_EMACS=emacs-25.3-travis
+  - EVM_EMACS=emacs-26-pretest-travis
+  - EVM_EMACS=emacs-git-snapshot-travis
