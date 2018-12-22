@@ -1,39 +1,26 @@
 language: ruby
-before_install:
-  - sudo mkdir /usr/local/evm
-  - sudo chown travis:travis /usr/local/evm
-
-  - sudo add-apt-repository -y ppa:cassou/emacs
-  - sudo apt-get update -qq
-  - sudo apt-get build-dep -qq emacs23
-  - sudo apt-get build-dep -qq emacs24
-
-  - bin/evm config path /tmp
-  - bin/evm install $EVM_EMACS
-  - bin/evm use $EVM_EMACS
+addons:
+  apt:
+    packages:
+      - autoconf
+      - autogen
+      - automake
+      - build-essential
+      - git
+      - libncurses5-dev
+      - libtool
+      - texinfo
 script:
-  - bundle exec rspec spec
-  - bin/emacs --version
-  - bin/emacs -Q --batch --eval
-        '(unless (or (string= (getenv "EVM_EMACS")
-                              (format "emacs-%d.%d-travis"
-                                      emacs-major-version
-                                      emacs-minor-version))
-                     (and (string= (getenv "EVM_EMACS") "emacs-26-pretest-travis")
-                          (= emacs-major-version 26))
-                     (and (string= (getenv "EVM_EMACS") "emacs-git-snapshot-travis")
-                          (= emacs-major-version 27)))
-                 (kill-emacs 1))'
-rvm:
-  - 1.9.3
+  - cd docker
+  - bash build-emacs.sh
 env:
-  - EVM_EMACS=emacs-24.1-travis
-  - EVM_EMACS=emacs-24.2-travis
-  - EVM_EMACS=emacs-24.3-travis
-  - EVM_EMACS=emacs-24.4-travis
-  - EVM_EMACS=emacs-24.5-travis
-  - EVM_EMACS=emacs-25.1-travis
-  - EVM_EMACS=emacs-25.2-travis
-  - EVM_EMACS=emacs-25.3-travis
-  - EVM_EMACS=emacs-26-pretest-travis
-  - EVM_EMACS=emacs-git-snapshot-travis
+  - VERSION=24.1
+  - VERSION=24.2
+  - VERSION=24.3
+  - VERSION=24.4
+  - VERSION=24.5
+  - VERSION=25.1
+  - VERSION=25.2
+  - VERSION=25.3
+  - VERSION=26.1
+  - VERSION=git-snapshot
