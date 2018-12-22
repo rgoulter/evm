@@ -3,15 +3,15 @@ services:
   - docker
 script:
   - cd docker
-  - bash generate.sh -v $EVM_EMACS
+  - bash generate.sh -v $BUILD_EVM_VERSION
 env:
-  # - EVM_EMACS=emacs-24.1-travis
-  # - EVM_EMACS=emacs-24.2-travis
-  # - EVM_EMACS=emacs-24.3-travis
-  # - EVM_EMACS=emacs-24.4-travis
-  # - EVM_EMACS=emacs-24.5-travis
-  # - EVM_EMACS=emacs-25.1-travis
-  # - EVM_EMACS=emacs-25.2-travis
-  # - EVM_EMACS=emacs-25.3-travis
-  # - EVM_EMACS=emacs-26.1-travis
-  - EVM_EMACS=emacs-git-snapshot-travis
+  # - BUILD_EVM_VERSION=24.1
+  # - BUILD_EVM_VERSION=24.2
+  # - BUILD_EVM_VERSION=24.3
+  # - BUILD_EVM_VERSION=24.4
+  # - BUILD_EVM_VERSION=24.5
+  # - BUILD_EVM_VERSION=25.1
+  # - BUILD_EVM_VERSION=25.2
+  # - BUILD_EVM_VERSION=25.3
+  # - BUILD_EVM_VERSION=26.1
+  - BUILD_EVM_VERSION=git-snapshot
