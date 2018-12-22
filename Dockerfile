@@ -1,4 +1,4 @@
-FROM travisci/ci-garnet:packer-1512502276-986baf0
+FROM travisci/ci-garnet:packer-1515445631-7dfb2e1
 
 # Warning: Travis CI docker images are HUGE!
 #
